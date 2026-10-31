@@ -1,200 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>bro.ai</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      background: #050505;
-      color: white;
-      font-family: Arial, Helvetica, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Ridiculous AI gradient background */
-    body::before {
-      content: "";
-      position: absolute;
-      width: 700px;
-      height: 700px;
-      border-radius: 50%;
-      background:
-        radial-gradient(circle,
-          rgba(255, 0, 200, .8),
-          rgba(70, 90, 255, .55),
-          rgba(0, 255, 200, .25),
-          transparent 70%);
-      filter: blur(80px);
-      animation: broOrb 5s ease-in-out infinite alternate;
-    }
-
-    @keyframes broOrb {
-      from {
-        transform: translate(-25%, -20%) scale(.8) rotate(0deg);
-      }
-
-      to {
-        transform: translate(25%, 20%) scale(1.4) rotate(180deg);
-      }
-    }
-
-    .container {
-      position: relative;
-      text-align: center;
-      z-index: 2;
-      animation: enterBro 1.3s cubic-bezier(.17,.67,.3,1.3);
-    }
-
-    @keyframes enterBro {
-      0% {
-        opacity: 0;
-        transform: scale(.3) rotate(-8deg);
-        filter: blur(20px);
-      }
-
-      70% {
-        transform: scale(1.12) rotate(2deg);
-      }
-
-      100% {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0);
-      }
-    }
-
-    .logo {
-      position: absolute;
-      top: 28px;
-      left: 32px;
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: -1px;
-      z-index: 5;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(70px, 16vw, 170px);
-      letter-spacing: -8px;
-      line-height: .9;
-      animation: breathe 2.4s ease-in-out infinite alternate;
-    }
-
-    @keyframes breathe {
-      from {
-        transform: scale(1);
-        text-shadow: 0 0 0px rgba(255,255,255,0);
-      }
-
-      to {
-        transform: scale(1.04);
-        text-shadow:
-          0 0 25px rgba(255,255,255,.25),
-          0 0 70px rgba(110,80,255,.35);
-      }
-    }
-
-    .status {
-      margin-top: 28px;
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      opacity: .5;
-    }
-
-    .dot {
-      display: inline-block;
-      width: 7px;
-      height: 7px;
-      margin-right: 8px;
-      border-radius: 50%;
-      background: #4cff8f;
-      box-shadow: 0 0 12px #4cff8f;
-      animation: blink 1s infinite alternate;
-    }
-
-    @keyframes blink {
-      from { opacity: .25; }
-      to { opacity: 1; }
-    }
-
-    .bro {
-      position: absolute;
-      font-size: 12px;
-      opacity: 0;
-      animation: floatBro 4s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes floatBro {
-      0% {
-        opacity: 0;
-        transform: translateY(40px) scale(.6);
-      }
-
-      20% {
-        opacity: .4;
-      }
-
-      80% {
-        opacity: .15;
-      }
-
-      100% {
-        opacity: 0;
-        transform: translateY(-250px) scale(1.3);
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#080a12">
+<meta name="description" content="bro.ai. The most advanced bro technology on earth.">
+<title>bro.ai</title>
+<style>
+:root{color-scheme:dark;--ink:#080a12;--paper:#f8f8fa;--lime:#c0ff86;--muted:#b7bacb}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;min-height:100%;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--ink);color:var(--paper);-webkit-font-smoothing:antialiased}
+body{min-height:100vh;min-height:100dvh;overflow-x:hidden;overflow-y:auto}
+button,input{font:inherit}
+.background{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 12% 10%,#3e2766 0,transparent 52%),radial-gradient(ellipse at 91% 76%,#154e58 0,transparent 49%),#080a12}
+.blob{position:absolute;border-radius:50%;filter:blur(62px);opacity:.42;mix-blend-mode:screen;will-change:transform}
+.blob.a{width:65vmax;height:65vmax;left:-22vmax;top:-25vmax;background:#8054ff;animation:orbitA 19s ease-in-out infinite alternate}
+.blob.b{width:65vmax;height:65vmax;right:-25vmax;bottom:-31vmax;background:#00c7a5;animation:orbitB 21s ease-in-out infinite alternate}
+.blob.c{width:38vmax;height:38vmax;left:42%;top:35%;background:#d633a9;opacity:.18;animation:orbitA 27s ease-in-out infinite alternate-reverse}
+@keyframes orbitA{to{transform:translate3d(18vw,13vh,0) scale(1.24) rotate(25deg)}}
+@keyframes orbitB{to{transform:translate3d(-16vw,-17vh,0) scale(.78)}}
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;background-image:radial-gradient(#ffffff10 .65px,transparent .9px);background-size:7px 7px;opacity:.34}
+.brandbar{position:fixed;inset:0 0 auto;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:calc(env(safe-area-inset-top,0px) + 21px) clamp(20px,4vw,52px) 15px;pointer-events:none}
+.logo{font-weight:900;font-size:23px;letter-spacing:-1.7px;line-height:1;pointer-events:auto}
+.logo .dot{color:var(--lime)}
+.signal{display:flex;align-items:center;gap:7px;border:1px solid #ffffff26;background:#0f1522a5;backdrop-filter:blur(12px);font-size:10px;font-weight:750;letter-spacing:1.6px;padding:10px 13px;border-radius:99px;color:#e3e6e9}
+.signal::before{content:"";width:7px;height:7px;border-radius:100%;background:var(--lime);box-shadow:0 0 12px var(--lime);animation:pulse 2.3s infinite}
+@keyframes pulse{50%{opacity:.4;box-shadow:0 0 2px var(--lime)}}
+.stage{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:calc(env(safe-area-inset-top,0px) + 90px) 20px calc(env(safe-area-inset-bottom,0px) + 36px);position:relative;z-index:3}
+.screen{display:none;width:100%;position:relative}
+.screen.active{display:block}
+.card{width:min(100%,450px);margin:auto;position:relative;padding:clamp(24px,6vw,42px);border-radius:28px;background:linear-gradient(145deg,#171926e0,#10131edb);box-shadow:0 24px 90px #0008,inset 0 1px #ffffff25;border:1px solid #ffffff2a;backdrop-filter:blur(24px);animation:cardIn .7s cubic-bezier(.2,1,.24,1) both}
+@keyframes cardIn{from{opacity:0;transform:translateY(26px) scale(.965);filter:blur(8px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+.kicker{display:flex;align-items:center;gap:9px;color:var(--lime);font-size:10px;letter-spacing:2.1px;font-weight:900;text-transform:uppercase}
+.kicker::before{content:"";height:1px;width:23px;background:var(--lime)}
+h1{font-size:clamp(47px,12vw,70px);letter-spacing:-.075em;line-height:.98;margin:21px 0 16px;font-weight:900}
+.lede{color:var(--muted);line-height:1.6;font-size:14px;margin:0;max-width:345px}
+.form{margin-top:30px}.fieldlabel{font-size:12px;font-weight:780;display:block;margin-bottom:10px;color:#edf0f5}
+.nameinput{width:100%;height:58px;border:1px solid #656982;background:#080b15c2;color:#fff;border-radius:14px;padding:0 17px;font-size:17px;outline:none;transition:border-color .2s,box-shadow .2s}
+.nameinput::placeholder{color:#767c91}.nameinput:focus-visible{border-color:var(--lime);box-shadow:0 0 0 4px #c0ff8629}
+.checkline{display:flex;align-items:flex-start;gap:12px;color:#d9dceb;font-size:13px;line-height:1.5;margin:21px 0 26px;cursor:pointer}
+.checkline input{height:19px;width:19px;accent-color:var(--lime);flex:none;margin:1px 0 0}
+.cta{border:0;background:var(--lime);color:#0b1209;border-radius:14px;min-height:56px;width:100%;font-size:13px;letter-spacing:1px;font-weight:950;cursor:pointer;box-shadow:0 12px 30px #a1fd6c26;transition:transform .2s,filter .2s}
+.cta:hover{transform:translateY(-2px);filter:brightness(1.07)}.cta:active{transform:translateY(1px)}.cta:disabled{opacity:.55;cursor:wait}
+.disclaimer{font-size:11px;line-height:1.5;margin:17px 0 0;color:#9299ae}.error{font-size:12px;line-height:1.5;color:#ffb7c4;min-height:18px;margin:8px 0 0}
+.verify-card{text-align:center}.verify-card .kicker{justify-content:center}.verify-card .kicker::before{display:none}
+.verify-card h1{font-size:clamp(36px,10vw,55px);margin:20px 0 0}
+.verify-icon{width:136px;height:136px;position:relative;margin:29px auto 25px;display:grid;place-items:center}
+.ring{position:absolute;border-radius:50%;inset:0;border:2px solid #c0ff8640;border-top-color:var(--lime);animation:spin 1.3s linear infinite}
+.ring.two{inset:12px;border-color:#bc84ff42;border-bottom-color:#bc84ff;animation-direction:reverse;animation-duration:2s}
+.ring.three{inset:30px;border-color:#ffffff24;border-right-color:#fff;animation-duration:1s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.verify-icon b{font-size:27px;letter-spacing:-2px}.verify-step{color:#e8e7ff;font-size:13px;min-height:22px;transition:opacity .15s}
+.progress{width:100%;height:3px;background:#ffffff19;border-radius:99px;overflow:hidden;margin:26px 0 0}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,#bc84ff,var(--lime));box-shadow:0 0 14px var(--lime);transition:width .4s ease}
+#reveal{height:100%;min-height:calc(100dvh - 140px);display:none;place-items:center;isolation:isolate}
+#reveal.active{display:grid}
+.titlewrap{position:relative;z-index:5;text-align:center;max-width:100%;padding:22px 10px}
+.reveal-title{margin:0;font-size:clamp(61px,17vw,176px);font-weight:950;letter-spacing:-.092em;line-height:1;white-space:nowrap;position:relative;text-shadow:0 6px 64px #c1ff8c27;animation:titleIn .95s cubic-bezier(.15,1.35,.2,1) both,glow 4.2s ease-in-out 1.2s infinite alternate}
+@keyframes titleIn{0%{opacity:0;transform:scale(.42) rotate(-5deg);filter:blur(24px)}60%{transform:scale(1.08) rotate(1deg)}100%{opacity:1;transform:scale(1);filter:blur(0)}}
+@keyframes glow{to{text-shadow:0 5px 80px #c0ff8678;transform:scale(1.023)}}
+.halo{position:absolute;inset:50% auto auto 50%;width:min(90vw,630px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);border:1px solid #ffffff20;z-index:-1;animation:halo 5s ease-in-out infinite}
+.halo::before,.halo::after{content:"";position:absolute;inset:12%;border-radius:50%;border:1px solid #b9ff8640}.halo::after{inset:27%;border-color:#b28cff55}
+@keyframes halo{50%{opacity:.5;scale:1.08}}
+#namefield{position:fixed;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+.floatbro{position:absolute;white-space:nowrap;max-width:95vw;overflow:hidden;text-overflow:ellipsis;padding:9px 13px;border:1px solid #ffffff2a;background:#ffffff0b;border-radius:99px;color:#eef4f1;font-size:clamp(11px,2.9vw,14px);letter-spacing:.08px;font-weight:740;box-shadow:0 8px 24px #0004;backdrop-filter:blur(7px);opacity:0;will-change:transform,opacity;animation:broFloat var(--duration,8s) ease-in-out forwards}
+.floatbro:nth-child(3n){border-color:#b6ff8645;color:#d4ffc1}.floatbro:nth-child(3n + 1){border-color:#bd99ff5a;color:#dfccff}
+@keyframes broFloat{0%{opacity:0;transform:translate3d(0,30px,0) rotate(-6deg) scale(.84)}14%{opacity:.7}60%{opacity:.58}92%{opacity:.16}100%{opacity:0;transform:translate3d(var(--drift,30px),-130px,0) rotate(6deg) scale(1.07)}}
+#burst{position:fixed;inset:0;pointer-events:none;z-index:9;overflow:hidden}.bit{position:absolute;width:5px;height:13px;border-radius:2px;animation:fall var(--dur,2.3s) ease-in forwards}
+@keyframes fall{0%{opacity:1;transform:translate3d(0,-3vh,0) rotate(0)}100%{opacity:0;transform:translate3d(var(--vx,35px),105vh,0) rotate(720deg)}}
+@media(max-width:500px){.brandbar{padding:calc(env(safe-area-inset-top,0px) + 18px) 21px 10px}.signal{font-size:9px;padding:9px 11px;letter-spacing:1.15px}.stage{padding-left:16px;padding-right:16px}.card{border-radius:23px}.reveal-title{font-size:clamp(61px,18vw,94px)}.halo{width:95vw}.floatbro{font-size:11px;padding:7px 10px}}
+@media(max-height:690px){.stage{padding-top:76px;padding-bottom:20px}.card{padding:23px}.form{margin-top:18px}.checkline{margin:15px 0 18px}.verify-icon{margin:15px auto}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.blob{display:none}}
+</style>
 </head>
-
 <body>
+<div class="background" aria-hidden="true"><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
+<div class="noise" aria-hidden="true"></div>
+<div id="namefield" aria-hidden="true"></div><div id="burst" aria-hidden="true"></div>
+<header class="brandbar"><div class="logo">bro<span class="dot">.</span>ai</div><div class="signal">BROTOCOL ONLINE</div></header>
+<main class="stage">
+<section class="screen active" id="gate" aria-labelledby="gate-title">
+  <div class="card">
+   <div class="kicker">EXCLUSIVE BETA ACCESS</div>
+   <h1 id="gate-title">Are you<br>a bro?</h1>
+   <p class="lede">Our proprietary AI needs to confirm one thing before granting access.</p>
+   <form id="joinForm" class="form">
+    <label class="fieldlabel" for="broName">What do the bros call you?</label>
+    <input class="nameinput" id="broName" maxlength="24" minlength="1" placeholder="Your bro name" autocomplete="nickname" required>
+    <label class="checkline"><input type="checkbox" id="broCheck" required><span>I hereby certify that I am, in fact, a bro.</span></label>
+    <button class="cta" type="submit" id="go">INITIATE BROTOCOL &nbsp; ↗</button>
+    <p class="error" id="error" role="alert" aria-live="polite"></p>
+   </form>
+   <p class="disclaimer">Your nickname will appear publicly on other bros' screens. Use a nickname, not private information.</p>
+  </div>
+</section>
+<section class="screen" id="verifying" aria-live="polite">
+ <div class="card verify-card">
+  <div class="kicker">PROPRIETARY TECHNOLOGY</div>
+  <h1>Running the<br>brotocol.</h1>
+  <div class="verify-icon" aria-hidden="true"><div class="ring"></div><div class="ring two"></div><div class="ring three"></div><b>bro</b></div>
+  <div id="verifyStep" class="verify-step">Consulting the group chat...</div>
+  <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+ </div>
+</section>
+<section class="screen" id="reveal" aria-label="sup bro"><div class="titlewrap"><div class="halo" aria-hidden="true"></div><h2 class="reveal-title">sup bro</h2></div></section>
+</main>
+<script type="module">
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-app.js';
+import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-auth.js';
+import { getFirestore, collection, doc, getDoc, setDoc, orderBy, query, limit, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/13.1.0/firebase-firestore.js';
 
-  <div class="logo">bro.ai</div>
-
-  <main class="container">
-    <h1>sup bro</h1>
-
-    <div class="status">
-      <span class="dot"></span>
-      AGI achieved
-    </div>
-  </main>
-
-  <script>
-    // Because apparently bro.ai needs particle effects.
-    function spawnBro() {
-      const bro = document.createElement("div");
-
-      bro.className = "bro";
-      bro.innerText = "bro";
-
-      bro.style.left = Math.random() * 100 + "vw";
-      bro.style.top = (70 + Math.random() * 30) + "vh";
-      bro.style.animationDuration =
-        (3 + Math.random() * 3) + "s";
-
-      document.body.appendChild(bro);
-
-      setTimeout(() => {
-        bro.remove();
-      }, 6000);
-    }
-
-    setInterval(spawnBro, 350);
-  </script>
-
+// These are public Firebase web app identifiers, NOT a service-account secret.
+const firebaseConfig = {
+  apiKey: 'AIzaSyChN_u4aUR3xthtdyzCm7Dyvkwva1xJoMQ',
+  authDomain: 'bro-ai-41733.firebaseapp.com',
+  projectId: 'bro-ai-41733',
+  storageBucket: 'bro-ai-41733.firebasestorage.app',
+  messagingSenderId: '360583310211',
+  appId: '1:360583310211:web:2d765923d20e38257be4b6'
+};
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+const $=id=>document.getElementById(id);
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const memoryKey='bro-ai-name-v3';
+let names=[];let me='';let interval=null;let stopRoster=null;let busy=false;
+function getRemembered(){try{return localStorage.getItem(memoryKey)||''}catch{return ''}}
+function remember(name){try{localStorage.setItem(memoryKey,name)}catch{}}
+function show(id){for(const node of document.querySelectorAll('.screen'))node.classList.toggle('active',node.id===id)}
+function pause(ms){return new Promise(resolve=>setTimeout(resolve,ms))}
+async function animateVerify(){const steps=['Consulting the group chat...','Checking handshake compatibility...','Running advanced fist bump analysis...','Compiling bro results...'];for(let i=0;i<steps.length;i++){$('verifyStep').textContent=steps[i];$('progress').style.width=((i+1)*25)+'%';await pause(reduced?60:420)}}
+function dedupe(items){names=[...new Set(items.filter(n=>typeof n==='string'&&n.trim()).map(n=>n.slice(0,24)))].slice(0,150);if(me&&!names.includes(me))names.push(me)}
+function beginRoster(){if(stopRoster)return;const q=query(collection(db,'bros'),orderBy('joinedAt','desc'),limit(150));stopRoster=onSnapshot(q,snap=>dedupe(snap.docs.map(d=>d.data().name)),e=>console.warn('Shared names unavailable:',e));}
+function addFloatingName(){if(!$('reveal').classList.contains('active')||!names.length||document.hidden)return;if($('namefield').childElementCount>=15)return;
+ const el=document.createElement('div');el.className='floatbro';el.textContent=names[Math.floor(Math.random()*names.length)]+' is a bro';
+ const mobile=window.innerWidth<650;
+ // Keep the hero readable: place name pills in the top/bottom bands on phones.
+ const top=mobile?(Math.random()<.5?12+Math.random()*20:68+Math.random()*21):9+Math.random()*82;
+ const left=mobile?3+Math.random()*38:2+Math.random()*78;
+ el.style.top=top+'%';el.style.left=left+'%';el.style.setProperty('--duration',(6+Math.random()*4)+'s');el.style.setProperty('--drift',(-30+Math.random()*80)+'px');
+ $('namefield').append(el);el.addEventListener('animationend',()=>el.remove(),{once:true});
+}
+function confetti(){if(reduced)return;const colors=['#beff89','#d9b9ff','#7cffe0','#fff','#fd9fcc'];for(let i=0;i<40;i++){const bit=document.createElement('span');bit.className='bit';bit.style.background=colors[i%colors.length];bit.style.left=(Math.random()*100)+'%';bit.style.top='-15px';bit.style.setProperty('--vx',(-70+Math.random()*140)+'px');bit.style.setProperty('--dur',(1.7+Math.random()*1.4)+'s');bit.style.animationDelay=(Math.random()*.45)+'s';$('burst').append(bit);bit.addEventListener('animationend',()=>bit.remove(),{once:true})}}
+function reveal(name){me=name;show('reveal');confetti();for(let i=0;i<8;i++)setTimeout(addFloatingName,reduced?0:i*185);if(!interval)interval=setInterval(addFloatingName,reduced?2600:680)}
+async function join(raw){if(busy)return;busy=true;$('go').disabled=true;$('error').textContent='';show('verifying');$('progress').style.width='0';
+ const verify=animateVerify();try{const {user}=await signInAnonymously(auth);const ref=doc(db,'bros',user.uid);const existing=await getDoc(ref);let name=raw;
+ if(existing.exists()&&typeof existing.data().name==='string')name=existing.data().name;
+ else await setDoc(ref,{name,joinedAt:serverTimestamp()});
+ me=name;remember(name);dedupe([name]);beginRoster();await verify;reveal(name);
+ }catch(err){console.error('Bro.ai setup error:',err);show('gate');$('error').textContent='Cannot connect to the bro database yet. Confirm Anonymous Authentication is enabled and Firestore rules are published.';$('go').disabled=false;busy=false}}
+$('joinForm').addEventListener('submit',event=>{event.preventDefault();const name=$('broName').value.trim().replace(/\s+/g,' ').slice(0,24);if(!name||!$('broCheck').checked)return;join(name)});
+const previous=getRemembered();if(previous)join(previous);
+</script>
 </body>
 </html>
